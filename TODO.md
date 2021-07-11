@@ -8,3 +8,4 @@
 - Color output
 - Text wrapping
 - Fix the way empty panels looks (no debug info)
+- Add an enumeration to differentiation between files / applications
