@@ -1,5 +1,3 @@
-from src.file_utility_functions import get_list_of_parent_directories_from_path
-
 from rich.console import Console
 
 from settings import Settings
