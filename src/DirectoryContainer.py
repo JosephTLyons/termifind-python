@@ -2,7 +2,6 @@ from __future__ import annotations
 from pathlib import Path
 from typing import Optional
 
-from rich import print
 from rich.panel import Panel
 
 from settings import Settings
@@ -33,7 +32,15 @@ class DirectoryContainer:
 
         return directory_items_sorted
 
-    def print(self) -> None:
+    def get_next_directory_container(self) -> Optional[DirectoryContainer]:
+        for index, directory_item in enumerate(self.directory_items):
+            if index == self.selected_item_index:
+                if directory_item.directory_item_type == DirectoryItemType.DIRECTORY:
+                    return DirectoryContainer(directory_item.path)
+
+        return None
+
+    def get_panel(self) -> Panel:
         item_names: list[str] = []
 
         for index, directory_item in enumerate(self.directory_items):
@@ -43,12 +50,4 @@ class DirectoryContainer:
 
         item_names_string: str = "\n".join(item_names)
 
-        print(Panel(item_names_string, title=self.path.name, expand=False))
-
-    def get_next_directory_container(self) -> Optional[DirectoryContainer]:
-        for index, directory_item in enumerate(self.directory_items):
-            if index == self.selected_item_index:
-                if directory_item.directory_item_type == DirectoryItemType.DIRECTORY:
-                    return DirectoryContainer(directory_item.path)
-
-        return None
+        return Panel(item_names_string, title=self.path.name, expand=False)

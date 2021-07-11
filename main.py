@@ -1,18 +1,9 @@
-from rich.console import Console
-
-from settings import Settings
-from src.PathContainer import PathContainer
+from src.UI.UI import UI
 
 
 def main() -> None:
-    console: Console = Console()
-
-    with console.screen():
-        path_container: PathContainer = PathContainer(Settings.LAUNCH_PATH)
-        path_container.print()
-        input("")
-        # TODO: Fix
-        console.clear()
+    ui: UI = UI()
+    ui.print()
 
 
 if __name__ == "__main__":
