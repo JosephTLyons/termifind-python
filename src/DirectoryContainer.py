@@ -50,4 +50,4 @@ class DirectoryContainer:
 
         item_names_string: str = "\n".join(item_names)
 
-        return Panel(item_names_string, title=self.path.name, expand=False)
+        return Panel(item_names_string, title=self.path.name, expand=True)
