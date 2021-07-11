@@ -5,3 +5,5 @@
 - Project structure
 - Code TODOs
 - Pretty traceback?
+- Color output
+- Extra newline
