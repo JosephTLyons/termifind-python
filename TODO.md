@@ -7,3 +7,4 @@
 - Pretty traceback?
 - Color output
 - Extra newline
+- Text wrapping
