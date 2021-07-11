@@ -9,5 +9,5 @@ class LayoutRegion(Enum):
     RIGHT = auto()
 
     @property
-    def __name__(self):
+    def __name__(self) -> str:
         return self.name.title()

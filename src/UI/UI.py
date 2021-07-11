@@ -1,3 +1,5 @@
+from typing import Optional
+
 from rich import print
 from rich.console import Console
 from rich.layout import Layout
@@ -21,10 +23,11 @@ class UI:
             Layout(name=LayoutRegion.LOWER.name),
         )
 
-        lower_panels: dict[LayoutRegion, Panel] = self.path_container.get_panels()
-        lower_left_panel = lower_panels.get(LayoutRegion.LEFT.name, None)
-        lower_middle_panel = lower_panels.get(LayoutRegion.MIDDLE.name, None)
-        lower_right_panel = lower_panels.get(LayoutRegion.RIGHT.name, None)
+        lower_panels: dict[str, Panel] = self.path_container.get_panels()
+
+        lower_left_panel: Optional[Panel] = lower_panels.get(LayoutRegion.LEFT.name, None)
+        lower_middle_panel: Optional[Panel] = lower_panels.get(LayoutRegion.MIDDLE.name, None)
+        lower_right_panel: Optional[Panel] = lower_panels.get(LayoutRegion.RIGHT.name, None)
 
         self.layout[str(LayoutRegion.LOWER)].split_row(
             Layout(lower_left_panel, name=LayoutRegion.LEFT.name),

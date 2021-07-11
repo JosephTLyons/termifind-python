@@ -14,8 +14,8 @@ class PathContainer:
         self.path_directories: list[Path] = get_list_of_parent_directories_from_path(path)
         self.path_directory_containers: list[DirectoryContainer] = [DirectoryContainer(path) for path in self.path_directories]
 
-    def get_panels(self) -> dict[LayoutRegion, Panel]:
-        panels_dictionary = {}
+    def get_panels(self) -> dict[str, Panel]:
+        panels_dictionary: dict[str, Panel] = {}
 
         if len(self.path_directory_containers) > 1:
             previous_directory_container: DirectoryContainer = self.path_directory_containers[-2]
