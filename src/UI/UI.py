@@ -14,19 +14,22 @@ class UI:
         self.console: Console = Console()
         self.layout: Layout = Layout()
 
-        self.top_panel: Panel = Panel(f"Current Path: {Settings.LAUNCH_PATH}", title="TermiFind", expand=True)
+        upper_panel: Panel = Panel(f"Current Path: {Settings.LAUNCH_PATH}", title="TermiFind", expand=True)
 
         self.layout.split_column(
-            Layout(self.top_panel, name=str(LayoutRegion.UPPER), size=3),
-            Layout(name=str(LayoutRegion.LOWER)),
+            Layout(upper_panel, name=LayoutRegion.UPPER.name, size=3),
+            Layout(name=LayoutRegion.LOWER.name),
         )
 
-        self.bottom_panels: dict[LayoutRegion, Panel] = self.path_container.get_panels()
+        lower_panels: dict[LayoutRegion, Panel] = self.path_container.get_panels()
+        lower_left_panel = lower_panels.get(LayoutRegion.LEFT.name, None)
+        lower_middle_panel = lower_panels.get(LayoutRegion.MIDDLE.name, None)
+        lower_right_panel = lower_panels.get(LayoutRegion.RIGHT.name, None)
 
         self.layout[str(LayoutRegion.LOWER)].split_row(
-            Layout(self.bottom_panels.get(LayoutRegion.LEFT, None), name=str(LayoutRegion.LEFT)),
-            Layout(self.bottom_panels.get(LayoutRegion.MIDDLE, None), name=str(LayoutRegion.MIDDLE)),
-            Layout(self.bottom_panels.get(LayoutRegion.RIGHT, None), name=str(LayoutRegion.RIGHT))
+            Layout(lower_left_panel, name=LayoutRegion.LEFT.name),
+            Layout(lower_middle_panel, name=LayoutRegion.MIDDLE.name),
+            Layout(lower_right_panel, name=LayoutRegion.RIGHT.name)
         )
 
     def print(self) -> None:

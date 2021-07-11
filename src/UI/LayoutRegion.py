@@ -1,12 +1,13 @@
-from enum import Enum
+from enum import Enum, auto
 
 
 class LayoutRegion(Enum):
-    LOWER = "Lower"
-    UPPER = "Upper"
-    LEFT = "Left"
-    MIDDLE = "Middle"
-    RIGHT = "Right"
+    LOWER = auto()
+    UPPER = auto()
+    LEFT = auto()
+    MIDDLE = auto()
+    RIGHT = auto()
 
-    def __str__(self):
-        return self.value
+    @property
+    def __name__(self):
+        return self.name.title()

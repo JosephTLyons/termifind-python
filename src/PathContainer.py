@@ -19,15 +19,15 @@ class PathContainer:
 
         if len(self.path_directory_containers) > 1:
             previous_directory_container: DirectoryContainer = self.path_directory_containers[-2]
-            panels_dictionary[LayoutRegion.LEFT] = previous_directory_container.get_panel()
+            panels_dictionary[LayoutRegion.LEFT.name] = previous_directory_container.get_panel()
 
         if len(self.path_directory_containers) > 0:
             current_directory_container: DirectoryContainer = self.path_directory_containers[-1]
-            panels_dictionary[LayoutRegion.MIDDLE] = current_directory_container.get_panel()
+            panels_dictionary[LayoutRegion.MIDDLE.name] = current_directory_container.get_panel()
 
             next_directory_container: Optional[DirectoryContainer] = current_directory_container.get_next_directory_container()
 
             if next_directory_container:
-                panels_dictionary[LayoutRegion.RIGHT] = next_directory_container.get_panel()
+                panels_dictionary[LayoutRegion.RIGHT.name] = next_directory_container.get_panel()
 
         return panels_dictionary
