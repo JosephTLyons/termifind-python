@@ -40,7 +40,7 @@ class DirectoryContainer:
 
         return None
 
-    def get_panel(self) -> Panel:
+    def get_directory_container_panel(self) -> Panel:
         item_names: list[str] = []
 
         for index, directory_item in enumerate(self.directory_items):
@@ -50,4 +50,14 @@ class DirectoryContainer:
 
         item_names_string: str = "\n".join(item_names)
 
-        return Panel(item_names_string, title=self.path.name, expand=True)
+        # Calling `name` on a `Path` object that is just the root directory produces an empty
+        # string, so simply call the `str()` on the path in that case
+        path_name = self.path.name
+
+        if path_name:
+            panel_title = path_name
+        else:
+            panel_title = str(self.path)
+
+
+        return Panel(item_names_string, title=panel_title, expand=True)

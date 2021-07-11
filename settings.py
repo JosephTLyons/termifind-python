@@ -12,7 +12,7 @@ class DefaultSettings:
 
 class Settings(DefaultSettings):
     """A place to override the default settings"""
-    SHOULD_SHOW_HIDDEN_FILES: bool = True
+    LAUNCH_PATH: Path = Path("/")
     DIRECTORY_SYMBOL: str = "Dir"
     FILE_SYMBOL: str = "Fil"
     SYMLINK_SYMBOL: str = "Sym"

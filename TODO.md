@@ -6,5 +6,5 @@
 - Code TODOs
 - Pretty traceback?
 - Color output
-- Extra newline
 - Text wrapping
+- Fix the way empty panels looks (no debug info)
