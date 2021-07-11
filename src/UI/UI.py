@@ -29,7 +29,7 @@ class UI:
         lower_middle_panel: Optional[Panel] = lower_panels.get(LayoutRegion.MIDDLE.name, None)
         lower_right_panel: Optional[Panel] = lower_panels.get(LayoutRegion.RIGHT.name, None)
 
-        self.layout[str(LayoutRegion.LOWER)].split_row(
+        self.layout[LayoutRegion.LOWER.name].split_row(
             Layout(lower_left_panel, name=LayoutRegion.LEFT.name),
             Layout(lower_middle_panel, name=LayoutRegion.MIDDLE.name),
             Layout(lower_right_panel, name=LayoutRegion.RIGHT.name)
