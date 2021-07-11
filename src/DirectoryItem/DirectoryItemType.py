@@ -2,15 +2,24 @@ from __future__ import annotations
 from enum import Enum, auto
 from pathlib import Path
 
+from settings import Settings
+
 
 class DirectoryItemType(Enum):
-    FILE = auto()
     DIRECTORY = auto()
+    FILE = auto()
     SYMLINK = auto()
 
     @property
     def symbol(self) -> str:
-        return self.name[0]
+        if self == DirectoryItemType.DIRECTORY:
+            return Settings.DIRECTORY_SYMBOL
+        elif self == DirectoryItemType.FILE:
+            return Settings.FILE_SYMBOL
+        elif self == DirectoryItemType.SYMLINK:
+            return Settings.SYMLINK_SYMBOL
+        else:
+            raise ValueError(f"Unknown DirectoryItemType: {self}")
 
     @staticmethod
     def get_directory_item_type(path: Path) -> DirectoryItemType:
@@ -22,4 +31,4 @@ class DirectoryItemType(Enum):
             return DirectoryItemType.SYMLINK
         else:
             # TODO: Fix this exception later
-            raise Exception(f"Something is not right, {path} is not a directory, file, or symlink")
+            raise ValueError(f"{path} is not a directory, file, or symlink")
