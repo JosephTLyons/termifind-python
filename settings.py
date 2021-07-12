@@ -27,10 +27,3 @@ class Settings:
     DIRECTORY_SYMBOL: str = USER_SETTINGS_DICTIONARY.get("DIRECTORY_SYMBOL", "D")
     FILE_SYMBOL: str = USER_SETTINGS_DICTIONARY.get("FILE_SYMBOL", "F")
     SYMLINK_SYMBOL: str = USER_SETTINGS_DICTIONARY.get("SYMLINK_SYMBOL", "S")
-
-    @classmethod
-    def add_setting(cls, setting_name: str, default_setting, setting=None):
-        if setting is not None:
-            setattr(cls, setting_name, setting)
-        else:
-            setattr(cls, setting_name, default_setting)
