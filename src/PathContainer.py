@@ -14,20 +14,30 @@ class PathContainer:
         self.path_directories: list[Path] = get_list_of_parent_directories_from_path(path)
         self.path_directory_containers: list[DirectoryContainer] = [DirectoryContainer(path) for path in self.path_directories]
 
-    def get_directory_container_panels(self) -> dict[str, Panel]:
-        panels_dictionary: dict[str, Panel] = {}
+        self.set_visible_directory_containers()
+
+    def set_visible_directory_containers(self) -> None:
+        self.previous_directory_container: Optional[DirectoryContainer] = None
+        self.current_directory_container: Optional[DirectoryContainer] = None
+        self.next_directory_container: Optional[DirectoryContainer] = None
 
         if len(self.path_directory_containers) > 1:
-            previous_directory_container: DirectoryContainer = self.path_directory_containers[-2]
-            panels_dictionary[LayoutRegion.LEFT.name] = previous_directory_container.get_directory_container_panel()
+            self.previous_directory_container = self.path_directory_containers[-2]
 
         if len(self.path_directory_containers) > 0:
-            current_directory_container: DirectoryContainer = self.path_directory_containers[-1]
-            panels_dictionary[LayoutRegion.MIDDLE.name] = current_directory_container.get_directory_container_panel()
+            self.current_directory_container = self.path_directory_containers[-1]
+            self.next_directory_container = self.current_directory_container.get_next_directory_container()
 
-            next_directory_container: Optional[DirectoryContainer] = current_directory_container.get_next_directory_container()
+    def get_directory_container_panels_dictionary(self) -> dict[str, Panel]:
+        panels_dictionary: dict[str, Panel] = {}
 
-            if next_directory_container:
-                panels_dictionary[LayoutRegion.RIGHT.name] = next_directory_container.get_directory_container_panel()
+        if self.previous_directory_container:
+            panels_dictionary[LayoutRegion.LEFT.name] = self.previous_directory_container.get_directory_container_panel()
+
+        if self.current_directory_container:
+            panels_dictionary[LayoutRegion.MIDDLE.name] = self.current_directory_container.get_directory_container_panel()
+
+        if self.next_directory_container:
+            panels_dictionary[LayoutRegion.RIGHT.name] = self.next_directory_container.get_directory_container_panel()
 
         return panels_dictionary

@@ -26,11 +26,13 @@ class UI:
 
         self.layout.split_column(*layouts)
 
-        directory_container_panels: dict[str, Panel] = self.path_container.get_directory_container_panels()
+        directory_container_panels: dict[str, Panel] = self.path_container.get_directory_container_panels_dictionary()
 
-        previous_directory_container_panel: Optional[Panel] = directory_container_panels.get(LayoutRegion.LEFT.name, None)
-        current_directory_container_panel: Optional[Panel] = directory_container_panels.get(LayoutRegion.MIDDLE.name, None)
-        next_directory_container_panel: Optional[Panel] = directory_container_panels.get(LayoutRegion.RIGHT.name, None)
+        default_panel: Panel = Panel("")
+
+        previous_directory_container_panel: Panel = directory_container_panels.get(LayoutRegion.LEFT.name, default_panel)
+        current_directory_container_panel: Panel = directory_container_panels.get(LayoutRegion.MIDDLE.name, default_panel)
+        next_directory_container_panel: Panel = directory_container_panels.get(LayoutRegion.RIGHT.name, default_panel)
 
         layouts = [
             Layout(previous_directory_container_panel, name=LayoutRegion.LEFT.name),
