@@ -13,17 +13,16 @@ class DirectoryItemType(Enum):
 
     @property
     def symbol(self) -> str:
-        match self:
-            case DirectoryItemType.APPLICATION:
-                return Settings.APPLICATION_SYMBOL
-            case DirectoryItemType.DIRECTORY:
-                return Settings.DIRECTORY_SYMBOL
-            case DirectoryItemType.FILE:
-                return Settings.FILE_SYMBOL
-            case DirectoryItemType.SYMLINK:
-                return Settings.SYMLINK_SYMBOL
-            case _:
-                raise ValueError(f"Unknown DirectoryItemType: {self}")
+        if self == DirectoryItemType.APPLICATION:
+            return Settings.APPLICATION_SYMBOL
+        elif self == DirectoryItemType.DIRECTORY:
+            return Settings.DIRECTORY_SYMBOL
+        elif self == DirectoryItemType.FILE:
+            return Settings.FILE_SYMBOL
+        elif self == DirectoryItemType.SYMLINK:
+            return Settings.SYMLINK_SYMBOL
+        else:
+            raise ValueError(f"Unknown DirectoryItemType: {self}")
 
     @staticmethod
     def get_directory_item_type(path: Path) -> DirectoryItemType:
