@@ -8,7 +8,7 @@ class DirectoryItem:
     def __init__(self, path: Path) -> None:
         self.path: Path = path
         self.name: str = self.path.name
-        self.is_hidden_file: bool = str(self.name).startswith(".")
+        self.is_hidden_file: bool = self.name.startswith(".")
 
         if not Settings.SHOULD_SHOW_FILE_EXTENSIONS and not self.is_hidden_file:
             self.name = self.name.split(".")[0]
