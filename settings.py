@@ -1,5 +1,6 @@
 import json
 from pathlib import Path
+from typing import Any
 
 
 USER_SETTINGS_JSON_PATH: Path = Path("user_settings.json")
@@ -7,7 +8,7 @@ USER_SETTINGS_JSON_PATH: Path = Path("user_settings.json")
 
 if USER_SETTINGS_JSON_PATH.exists():
     with open(USER_SETTINGS_JSON_PATH) as user_settings_json:
-        USER_SETTINGS_DICTIONARY = json.load(user_settings_json)
+        USER_SETTINGS_DICTIONARY: dict[str, Any] = json.load(user_settings_json)
 else:
     USER_SETTINGS_DICTIONARY = {}
 
