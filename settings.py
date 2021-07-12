@@ -5,8 +5,8 @@ with open("user_settings.json") as user_settings_json:
     USER_SETTINGS_DICTIONARY = json.load(user_settings_json)
 
 
-def get_launch_setting():
-    launch_path_string: Path = USER_SETTINGS_DICTIONARY.get("SHOULD_SHOW_FILE_EXTENSIONS", None)
+def get_launch_setting() -> Path:
+    launch_path_string: str = USER_SETTINGS_DICTIONARY.get("SHOULD_SHOW_FILE_EXTENSIONS", None)
 
     if launch_path_string:
         launch_path = Path(launch_path_string)
