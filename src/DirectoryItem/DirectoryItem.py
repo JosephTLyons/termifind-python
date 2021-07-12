@@ -16,4 +16,7 @@ class DirectoryItem:
         self.directory_item_type = DirectoryItemType.get_directory_item_type(self.path)
 
     def __str__(self) -> str:
-        return f"({self.directory_item_type.symbol}) {self.name}"
+        if Settings.SHOULD_SHOW_DIRECTORY_ITEM_TYPE:
+            return f"({self.directory_item_type.symbol}) {self.name}"
+
+        return self.name
