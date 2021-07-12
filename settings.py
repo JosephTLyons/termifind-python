@@ -15,6 +15,7 @@ def get_launch_setting():
 
     return launch_path
 
+
 class Settings:
     LAUNCH_PATH: Path = get_launch_setting()
 
