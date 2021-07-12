@@ -1,5 +1,5 @@
 from pathlib import Path
-from settings import Settings
+from Settings import Settings
 
 from src.DirectoryItem.DirectoryItemType import DirectoryItemType
 

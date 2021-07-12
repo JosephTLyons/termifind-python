@@ -4,7 +4,7 @@ from typing import Optional
 
 from rich.panel import Panel
 
-from settings import Settings
+from Settings import Settings
 from src.DirectoryItem.DirectoryItem import DirectoryItem, DirectoryItemType
 
 

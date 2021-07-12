@@ -2,7 +2,7 @@ from __future__ import annotations
 from enum import Enum, auto
 from pathlib import Path
 
-from settings import Settings
+from Settings import Settings
 
 
 class DirectoryItemType(Enum):
