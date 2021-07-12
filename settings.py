@@ -9,7 +9,7 @@ def get_launch_path_setting() -> Path:
     launch_path_string: str = USER_SETTINGS_DICTIONARY.get("SHOULD_SHOW_FILE_EXTENSIONS", None)
 
     if launch_path_string:
-        launch_path = Path(launch_path_string)
+        launch_path: Path = Path(launch_path_string)
     else:
         launch_path = Path.home()
 
