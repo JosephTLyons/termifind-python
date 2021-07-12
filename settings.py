@@ -8,6 +8,7 @@ class DefaultSettings:
     SHOULD_SHOW_HIDDEN_FILES: bool = False
     SHOULD_SORT_CASE_SENSITIVE: bool = False
 
+    APPLICATION_SYMBOL: str = "A"
     DIRECTORY_SYMBOL: str = "D"
     FILE_SYMBOL: str = "F"
     SYMLINK_SYMBOL: str = "S"
