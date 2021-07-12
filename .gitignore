@@ -1,4 +1,5 @@
 __pycache__
 .DS_STORE
 .mypy_cache
+user_settings.json
 virtual-env
