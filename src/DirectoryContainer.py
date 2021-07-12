@@ -14,6 +14,18 @@ class DirectoryContainer:
         self.directory_items: list[DirectoryItem] = self.get_directory_items()
         self.selected_item_index: int = 0
 
+    def move_down(self) -> None:
+        if self.selected_item_index == len(self.directory_items) - 1:
+            self.selected_item_index = 0
+        else:
+            self.selected_item_index += 1
+
+    def move_up(self) -> None:
+        if self.selected_item_index == 0:
+            self.selected_item_index = len(self.directory_items) - 1
+        else:
+            self.selected_item_index -= 1
+
     def get_directory_items(self) -> list[DirectoryItem]:
         directory_items: list[DirectoryItem] = []
 
