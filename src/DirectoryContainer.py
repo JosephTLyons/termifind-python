@@ -59,5 +59,6 @@ class DirectoryContainer:
         else:
             panel_title = str(self.path)
 
+        panel_title += f" ({len(self.directory_items)})"
 
         return Panel(item_names_string, title=panel_title, expand=True)
