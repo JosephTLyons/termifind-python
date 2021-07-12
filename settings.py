@@ -1,8 +1,15 @@
 import json
 from pathlib import Path
 
-with open("user_settings.json") as user_settings_json:
-    USER_SETTINGS_DICTIONARY = json.load(user_settings_json)
+
+USER_SETTINGS_JSON_PATH: Path = Path("user_settings.json")
+
+
+if USER_SETTINGS_JSON_PATH.exists():
+    with open(USER_SETTINGS_JSON_PATH) as user_settings_json:
+        USER_SETTINGS_DICTIONARY = json.load(user_settings_json)
+else:
+    USER_SETTINGS_DICTIONARY = {}
 
 
 def get_launch_path_setting() -> Path:
