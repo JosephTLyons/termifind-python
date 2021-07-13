@@ -7,4 +7,3 @@
 - Pretty traceback?
 - Color output
 - Add an enumeration to differentiation between files / applications
-- Gray out previous panel, make center one green, color the right one as well
