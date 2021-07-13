@@ -46,10 +46,10 @@ class DirectoryContainer:
         return directory_items_sorted
 
     def get_next_directory_container(self) -> Optional[DirectoryContainer]:
-        for index, directory_item in enumerate(self.directory_items):
-            if index == self.selected_item_index:
-                if directory_item.directory_item_type == DirectoryItemType.DIRECTORY:
-                    return DirectoryContainer(directory_item.path)
+        directory_item = self.directory_items[self.selected_item_index]
+
+        if directory_item.directory_item_type == DirectoryItemType.DIRECTORY:
+            return DirectoryContainer(directory_item.path)
 
         return None
 
