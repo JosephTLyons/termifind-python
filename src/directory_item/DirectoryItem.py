@@ -1,3 +1,4 @@
+from __future__ import annotations
 from pathlib import Path
 from Settings import Settings
 
@@ -21,7 +22,7 @@ class DirectoryItem:
 
         return self.name
 
-    def __lt__(self, other) -> bool:
+    def __lt__(self, other: DirectoryItem) -> bool:
         if Settings.SHOULD_SORT_CASE_SENSITIVE:
             return self.name < other.name
 
