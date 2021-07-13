@@ -67,7 +67,7 @@ class DirectoryContainer:
         path_name = self.path.name
 
         if path_name:
-            panel_title = path_name
+            panel_title: str = path_name
         else:
             panel_title = str(self.path)
 
