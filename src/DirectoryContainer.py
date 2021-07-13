@@ -1,4 +1,5 @@
 from __future__ import annotations
+import bisect
 from pathlib import Path
 from typing import Optional
 
@@ -36,14 +37,9 @@ class DirectoryContainer:
             if directory_item.is_hidden_file and not Settings.SHOULD_SHOW_HIDDEN_FILES:
                 continue
 
-            directory_items.append(directory_item)
+            bisect.insort(directory_items, directory_item)
 
-        directory_items_sorted: list[DirectoryItem] = sorted(
-            directory_items,
-            key=lambda directory_item: directory_item.name if Settings.SHOULD_SORT_CASE_SENSITIVE else directory_item.name.lower()
-        )
-
-        return directory_items_sorted
+        return directory_items
 
     def get_next_directory_container(self) -> Optional[DirectoryContainer]:
         directory_item = self.directory_items[self.selected_item_index]
