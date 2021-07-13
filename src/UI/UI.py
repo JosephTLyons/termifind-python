@@ -1,5 +1,3 @@
-from typing import Optional
-
 from rich import print
 from rich.console import Console
 from rich.layout import Layout
