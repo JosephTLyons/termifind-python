@@ -54,15 +54,12 @@ class DirectoryContainer:
         return None
 
     def get_directory_container_panel(self) -> Panel:
-        item_names: list[str] = []
+        item_name_texts: Text = Text(no_wrap=True, overflow="ellipsis")
 
         for index, directory_item in enumerate(self.directory_items):
             selected_status: str = "*" if index == self.selected_item_index else " "
             item_string: str = f"{selected_status} {directory_item}"
-            item_names.append(item_string)
-
-        item_names_string: str = "\n".join(item_names)
-        item_names_text: Text = Text(item_names_string, no_wrap=True, overflow="ellipsis")
+            item_name_texts.append(f"{item_string}\n")
 
         # Calling `name` on a `Path` object that is just the root directory produces an empty
         # string, so simply call the `str()` on the path in that case
@@ -75,4 +72,4 @@ class DirectoryContainer:
 
         panel_title += f" ({len(self.directory_items)})"
 
-        return Panel(item_names_text, title=panel_title, expand=True)
+        return Panel(item_name_texts, title=panel_title, expand=True)
