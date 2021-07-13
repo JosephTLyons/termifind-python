@@ -3,6 +3,7 @@ from pathlib import Path
 from typing import Optional
 
 from rich.panel import Panel
+from rich.text import Text
 
 from Settings import Settings
 from src.directory_item.DirectoryItem import DirectoryItem, DirectoryItemType
@@ -61,6 +62,7 @@ class DirectoryContainer:
             item_names.append(item_string)
 
         item_names_string: str = "\n".join(item_names)
+        item_names_text: Text = Text(item_names_string, no_wrap=True, overflow="ellipsis")
 
         # Calling `name` on a `Path` object that is just the root directory produces an empty
         # string, so simply call the `str()` on the path in that case
@@ -73,4 +75,4 @@ class DirectoryContainer:
 
         panel_title += f" ({len(self.directory_items)})"
 
-        return Panel(item_names_string, title=panel_title, expand=True)
+        return Panel(item_names_text, title=panel_title, expand=True)
