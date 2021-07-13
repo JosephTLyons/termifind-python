@@ -1,7 +1,7 @@
 from pathlib import Path
 from Settings import Settings
 
-from src.DirectoryItem.DirectoryItemType import DirectoryItemType
+from src.directory_item.DirectoryItemType import DirectoryItemType
 
 
 class DirectoryItem:

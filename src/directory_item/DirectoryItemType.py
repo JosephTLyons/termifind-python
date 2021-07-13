@@ -27,7 +27,8 @@ class DirectoryItemType(Enum):
     @staticmethod
     def get_directory_item_type(path: Path) -> DirectoryItemType:
         if path.is_dir():
-            # Applications are folders on Mac, so `is_dir()` returns `True` for them
+            # Applications are folders on Mac, so `is_dir()` returns `True` for them, which is why
+            # this is nested in this area
             if str(path.name).endswith(".app"):
                 return DirectoryItemType.APPLICATION
 

@@ -5,7 +5,7 @@ from typing import Optional
 from rich.panel import Panel
 
 from Settings import Settings
-from src.DirectoryItem.DirectoryItem import DirectoryItem, DirectoryItemType
+from src.directory_item.DirectoryItem import DirectoryItem, DirectoryItemType
 
 
 class DirectoryContainer:
