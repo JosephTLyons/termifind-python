@@ -6,7 +6,7 @@ from rich.panel import Panel
 from rich.text import Text
 
 from Settings import Settings
-from src.directory_item.DirectoryItem import DirectoryItem, DirectoryItemType
+from src.directory_item.DirectoryItem import DirectoryItem, DirectoryItemType  # type: ignore[attr-defined]
 
 
 class DirectoryContainer:

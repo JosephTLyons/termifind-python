@@ -1,6 +1,6 @@
 # TODO
 
-- Fix mypy errors
+- Fix mypy error ignores
 - Clean up all imports
 - Project structure
 - Code TODOs

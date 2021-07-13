@@ -9,5 +9,5 @@ class LayoutRegion(Enum):
     RIGHT = auto()
 
     @property
-    def name(self) -> str:
+    def name(self) -> str:  # type: ignore[override]
         return super().name.title()
