@@ -3,7 +3,7 @@ from src.UI.UI import UI
 
 def main() -> None:
     ui: UI = UI()
-    ui.print()
+    ui.start()
 
 
 if __name__ == "__main__":

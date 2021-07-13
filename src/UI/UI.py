@@ -46,7 +46,7 @@ class UI:
 
         self.layout[LayoutRegion.LOWER.name].split_row(*layouts)
 
-    def print(self) -> None:
+    def start(self) -> None:
         with Live(self.layout, refresh_per_second=4, screen=True):
             Console().clear_live()
             print(self.layout)
