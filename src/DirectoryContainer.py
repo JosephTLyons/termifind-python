@@ -38,10 +38,10 @@ class DirectoryContainer:
 
             directory_items.append(directory_item)
 
-        if Settings.SHOULD_SORT_CASE_SENSITIVE:
-            directory_items_sorted: list[DirectoryItem] = sorted(directory_items, key=lambda directory_item: directory_item.name)
-        else:
-            directory_items_sorted = sorted(directory_items, key=lambda directory_item: directory_item.name.lower())
+        directory_items_sorted: list[DirectoryItem] = sorted(
+            directory_items,
+            key=lambda directory_item: directory_item.name if Settings.SHOULD_SORT_CASE_SENSITIVE else directory_item.name.lower()
+        )
 
         return directory_items_sorted
 
