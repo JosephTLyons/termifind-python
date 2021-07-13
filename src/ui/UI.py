@@ -6,7 +6,7 @@ from rich.panel import Panel
 
 from Settings import Settings
 from src.PathContainer import PathContainer
-from src.UI.LayoutRegion import LayoutRegion
+from src.ui.LayoutRegion import LayoutRegion
 
 
 class UI:

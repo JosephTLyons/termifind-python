@@ -4,7 +4,7 @@ from typing import Optional
 from rich.panel import Panel
 
 from src.DirectoryContainer import DirectoryContainer
-from src.UI.LayoutRegion import LayoutRegion
+from src.ui.LayoutRegion import LayoutRegion
 from src.file_utility_functions import get_list_of_parent_directories_from_path
 
 
