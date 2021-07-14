@@ -5,8 +5,8 @@ from rich.panel import Panel
 
 from Settings import Settings
 from src.DirectoryContainer import DirectoryContainer
-from src.ui.LayoutRegion import LayoutRegion
 from src.file_utility_functions import get_list_of_parent_directories_from_path
+from src.ui.LayoutRegion import LayoutRegion
 
 
 class PathContainer:

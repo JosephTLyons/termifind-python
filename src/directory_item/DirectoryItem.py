@@ -1,8 +1,9 @@
 from __future__ import annotations
-from pathlib import Path
-from Settings import Settings
 
-from src.directory_item.DirectoryItemType import DirectoryItemType, get_directory_item_type, get_directory_item_type_symbol
+from pathlib import Path
+
+from Settings import Settings
+from src.directory_item.DirectoryItemType import get_directory_item_type, get_directory_item_type_symbol
 
 
 class DirectoryItem:
