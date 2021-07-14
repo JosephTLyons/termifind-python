@@ -3,6 +3,7 @@ from rich.console import Console
 from rich.layout import Layout
 from rich.live import Live
 from rich.panel import Panel
+from rich.text import Text
 
 from Settings import Settings
 from src.PathContainer import PathContainer
@@ -26,7 +27,7 @@ class UI:
 
         directory_container_panels: dict[str, Panel] = self.path_container.get_directory_container_panels_dictionary()
 
-        default_panel: Panel = Panel("")
+        default_panel: Panel = Panel(Text(""))
 
         previous_directory_container_panel: Panel = directory_container_panels.get(LayoutRegion.LEFT.name, default_panel)
         current_directory_container_panel: Panel = directory_container_panels.get(LayoutRegion.MIDDLE.name, default_panel)

@@ -50,13 +50,13 @@ class DirectoryContainer:
 
         return None
 
-    def get_directory_container_panel(self) -> Panel:
+    def get_directory_container_panel(self, should_style_text: bool = True) -> Panel:
         item_name_texts: Text = Text(no_wrap=True, overflow="ellipsis")
 
         for index, directory_item in enumerate(self.directory_items):
             selected_status: str = "*" if index == self.selected_item_index else " "
             item_string: str = f"{selected_status} {directory_item}"
-            directory_item_type_color = get_directory_item_type_style(directory_item.directory_item_type)
+            directory_item_type_color = get_directory_item_type_style(directory_item.directory_item_type) if should_style_text else None
             item_name_texts.append(f"{item_string}\n", style=directory_item_type_color)
 
         # Calling `name` on a `Path` object that is just the root directory produces an empty
@@ -70,4 +70,4 @@ class DirectoryContainer:
 
         panel_title += f" ({len(self.directory_items)})"
 
-        return Panel(item_name_texts, title=panel_title, expand=True)
+        return Panel(item_name_texts, title=panel_title, expand=True, )

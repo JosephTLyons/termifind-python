@@ -3,6 +3,7 @@ from typing import Optional
 
 from rich.panel import Panel
 
+from Settings import Settings
 from src.DirectoryContainer import DirectoryContainer
 from src.ui.LayoutRegion import LayoutRegion
 from src.file_utility_functions import get_list_of_parent_directories_from_path
@@ -31,13 +32,15 @@ class PathContainer:
     def get_directory_container_panels_dictionary(self) -> dict[str, Panel]:
         panels_dictionary: dict[str, Panel] = {}
 
+        should_style_text = not Settings.IS_IN_FOCUS_MODE
+
         if self.previous_directory_container:
-            panels_dictionary[LayoutRegion.LEFT.name] = self.previous_directory_container.get_directory_container_panel()
+            panels_dictionary[LayoutRegion.LEFT.name] = self.previous_directory_container.get_directory_container_panel(should_style_text=should_style_text)
 
         if self.current_directory_container:
             panels_dictionary[LayoutRegion.MIDDLE.name] = self.current_directory_container.get_directory_container_panel()
 
         if self.next_directory_container:
-            panels_dictionary[LayoutRegion.RIGHT.name] = self.next_directory_container.get_directory_container_panel()
+            panels_dictionary[LayoutRegion.RIGHT.name] = self.next_directory_container.get_directory_container_panel(should_style_text=should_style_text)
 
         return panels_dictionary
