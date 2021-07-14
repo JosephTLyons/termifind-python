@@ -55,9 +55,9 @@ class DirectoryContainer:
 
         for index, directory_item in enumerate(self.directory_items):
             selected_status: str = "*" if index == self.selected_item_index else " "
-            item_string: str = f"{selected_status} {directory_item}"
+            item_name_texts.append(f"{selected_status} ")
             directory_item_type_color = get_directory_item_type_style(directory_item.directory_item_type) if should_style_text else None
-            item_name_texts.append(f"{item_string}\n", style=directory_item_type_color)
+            item_name_texts.append(f"{directory_item}\n", style=directory_item_type_color)
 
         # Calling `name` on a `Path` object that is just the root directory produces an empty
         # string, so simply call the `str()` on the path in that case
