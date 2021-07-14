@@ -1,6 +1,6 @@
 import json
 from pathlib import Path
-from typing import Any
+from typing import Any, Optional
 
 
 USER_SETTINGS_JSON_PATH: Path = Path("user_settings.json")
@@ -14,12 +14,14 @@ else:
 
 
 def get_launch_path_setting() -> Path:
-    launch_path_string: str = USER_SETTINGS_DICTIONARY.get("LAUNCH_PATH", None)
+    launch_path_string: Optional[str] = USER_SETTINGS_DICTIONARY.get("LAUNCH_PATH", None)
+    launch_path: Path = Path.home()
 
     if launch_path_string:
-        launch_path: Path = Path(launch_path_string)
-    else:
-        launch_path = Path.home()
+        try:
+            launch_path = Path(launch_path_string)
+        except FileNotFoundError:
+            pass
 
     return launch_path
 
