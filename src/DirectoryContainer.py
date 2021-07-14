@@ -56,7 +56,12 @@ class DirectoryContainer:
         for index, directory_item in enumerate(self.directory_items):
             selected_status: str = "*" if index == self.selected_item_index else " "
             item_name_texts.append(f"{selected_status} ")
-            directory_item_type_color = get_directory_item_type_style(directory_item.directory_item_type) if should_style_text else None
+
+            if should_style_text:
+                directory_item_type_color = get_directory_item_type_style(directory_item.directory_item_type)
+            else:
+                directory_item_type_color = None
+
             item_name_texts.append(f"{directory_item}\n", style=directory_item_type_color)
 
         # Calling `name` on a `Path` object that is just the root directory produces an empty
