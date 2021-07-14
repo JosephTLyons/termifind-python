@@ -15,15 +15,14 @@ else:
 
 def get_launch_path_setting() -> Path:
     launch_path_string: Optional[str] = USER_SETTINGS_DICTIONARY.get("LAUNCH_PATH", None)
-    launch_path: Path = Path.home()
 
     if launch_path_string:
-        try:
-            launch_path = Path(launch_path_string)
-        except FileNotFoundError:
-            pass
+        launch_path = Path(launch_path_string)
 
-    return launch_path
+        if launch_path.exists():
+            return launch_path
+
+    return Path.home()
 
 
 class Settings:
