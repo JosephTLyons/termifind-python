@@ -2,7 +2,7 @@ from __future__ import annotations
 from pathlib import Path
 from Settings import Settings
 
-from src.directory_item.DirectoryItemType import DirectoryItemType
+from src.directory_item.DirectoryItemType import DirectoryItemType, get_directory_item_type, get_directory_item_type_symbol
 
 
 class DirectoryItem:
@@ -14,11 +14,12 @@ class DirectoryItem:
         if not Settings.SHOULD_SHOW_FILE_EXTENSIONS and not self.is_hidden_file:
             self.name = self.name.split(".")[0]
 
-        self.directory_item_type = DirectoryItemType.get_directory_item_type(self.path)
+        self.directory_item_type = get_directory_item_type(self.path)
 
     def __str__(self) -> str:
         if Settings.SHOULD_SHOW_DIRECTORY_ITEM_TYPE:
-            return f"({self.directory_item_type.symbol}) {self.name}"
+            directory_item_symbol = get_directory_item_type_symbol(self.directory_item_type)
+            return f"({directory_item_symbol}) {self.name}"
 
         return self.name
 

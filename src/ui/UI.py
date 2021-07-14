@@ -33,8 +33,8 @@ class UI:
         next_directory_container_panel: Panel = directory_container_panels.get(LayoutRegion.RIGHT.name, default_panel)
 
         if Settings.IS_IN_FOCUS_MODE:
-            previous_directory_container_panel.style = Settings.FOCUS_MODE_DIMMED_COLOR
-            next_directory_container_panel.style = Settings.FOCUS_MODE_DIMMED_COLOR
+            previous_directory_container_panel.style = Settings.FOCUS_MODE_DIMMED_STYLE
+            next_directory_container_panel.style = Settings.FOCUS_MODE_DIMMED_STYLE
 
         layouts = [
             Layout(previous_directory_container_panel, name=LayoutRegion.LEFT.name),
