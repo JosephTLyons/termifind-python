@@ -51,18 +51,7 @@ class DirectoryContainer:
         return None
 
     def get_directory_container_panel(self, should_style_text: bool = True) -> Panel:
-        item_name_texts: Text = Text(no_wrap=True, overflow="ellipsis")
-
-        for index, directory_item in enumerate(self.directory_items):
-            selected_status: str = "*" if index == self.selected_item_index else " "
-            item_name_texts.append(f"{selected_status} ")
-
-            if should_style_text:
-                directory_item_type_color = get_directory_item_type_style(directory_item.directory_item_type)
-            else:
-                directory_item_type_color = None
-
-            item_name_texts.append(f"{directory_item}\n", style=directory_item_type_color)
+        item_name_texts: Text = self.__get_item_name_text(should_style_text)
 
         # Calling `name` on a `Path` object that is just the root directory produces an empty
         # string, so simply call the `str()` on the path in that case
@@ -75,4 +64,24 @@ class DirectoryContainer:
 
         panel_title += f" ({len(self.directory_items)})"
 
-        return Panel(item_name_texts, title=panel_title, expand=True, )
+        return Panel(item_name_texts, title=panel_title, expand=True)
+
+    def __get_item_name_text(self, should_style_text: bool) -> Text:
+        item_name_text: Text = Text(no_wrap=True, overflow="ellipsis")
+
+        for index, directory_item in enumerate(self.directory_items):
+            if index == self.selected_item_index:
+                selection_status: str = Settings.SELECTOR_SYMBOL
+            else:
+                selection_status = " " * len(Settings.SELECTOR_SYMBOL)
+
+            item_name_text.append(f"{selection_status} ")
+
+            if should_style_text:
+                directory_item_type_color: Optional[str] = get_directory_item_type_style(directory_item.directory_item_type)
+            else:
+                directory_item_type_color = None
+
+            item_name_text.append(f"{directory_item}\n", style=directory_item_type_color)
+
+        return item_name_text
