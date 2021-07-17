@@ -12,20 +12,24 @@ from src.directory_item.DirectoryItemType import DirectoryItemType
 class DirectoryContainer:
     def __init__(self, path: Path) -> None:
         self.path: Path = path
+        self.has_permission_error: bool = False
         self.directory_items: list[DirectoryItem] = self.get_directory_items()
         self.selected_item_index: int = 0
 
     def __str__(self) -> str:
-        # Calling `name` on a `Path` object that is just the root directory produces an empty
-        # string, so simply call the `str()` on the path in that case
         path_name: str = self.path.name
 
+        # Calling `name` on a `Path` object that is just the root directory produces an empty
+        # string, so simply call the `str()` on the path in that case
         if path_name:
             name: str = path_name
         else:
             name = str(self.path)
 
-        name += f" ({len(self.directory_items)})"
+        if self.has_permission_error:
+            name += " (Permission Error)"
+        else:
+            name += f" ({len(self.directory_items)})"
 
         return name
 
@@ -44,13 +48,16 @@ class DirectoryContainer:
     def get_directory_items(self) -> list[DirectoryItem]:
         directory_items: list[DirectoryItem] = []
 
-        for item in self.path.iterdir():
-            directory_item: DirectoryItem = DirectoryItem(item)
+        try:
+            for item in self.path.iterdir():
+                directory_item: DirectoryItem = DirectoryItem(item)
 
-            if directory_item.is_hidden_file and not Settings.SHOULD_SHOW_HIDDEN_FILES:
-                continue
+                if directory_item.is_hidden_file and not Settings.SHOULD_SHOW_HIDDEN_FILES:
+                    continue
 
-            bisect.insort(directory_items, directory_item)
+                bisect.insort(directory_items, directory_item)
+        except PermissionError:
+            self.has_permission_error = True
 
         return directory_items
 
