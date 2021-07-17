@@ -2,14 +2,14 @@ from pathlib import Path
 from typing import Optional
 
 from src.DirectoryContainer import DirectoryContainer
-from src.file_utility_functions import get_list_of_parent_directories_from_path
+from src.file_utility_functions import get_list_of_directories_from_path
 
 
 class PathContainer:
     def __init__(self, path: Path) -> None:
         self.path = path
         self.directory_containers: list[DirectoryContainer] = [
-            DirectoryContainer(path) for path in get_list_of_parent_directories_from_path(path)
+            DirectoryContainer(path) for path in get_list_of_directories_from_path(path)
         ]
 
         self.previous_directory_container: Optional[DirectoryContainer] = None
