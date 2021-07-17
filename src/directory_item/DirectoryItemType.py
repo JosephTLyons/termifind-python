@@ -13,6 +13,10 @@ class DirectoryItemType(Enum):
     SYMLINK = auto()
 
 
+class UnknownDirectoryItemType(Exception):
+    pass
+
+
 def get_directory_item_type(path: Path) -> DirectoryItemType:
     if path.is_dir():
         # Applications are folders on Mac, so `is_dir()` returns `True` for them, which is why
@@ -26,8 +30,8 @@ def get_directory_item_type(path: Path) -> DirectoryItemType:
     elif path.is_symlink():
         return DirectoryItemType.SYMLINK
     else:
-        # TODO: Fix this exception later
-        raise ValueError(f"{path} is not an application, directory, file, or symlink")
+        # TODO: Should this be a different error?
+        raise UnknownDirectoryItemType(f"{path} is not an application, directory, file, or symlink")
 
 
 def get_directory_item_type_symbol(directory_item_type: DirectoryItemType) -> str:
@@ -40,7 +44,7 @@ def get_directory_item_type_symbol(directory_item_type: DirectoryItemType) -> st
     elif directory_item_type == DirectoryItemType.SYMLINK:
         return Settings.SYMLINK_SYMBOL
     else:
-        raise ValueError(f"Unknown DirectoryItemType: {directory_item_type}")
+        raise UnknownDirectoryItemType(f"Unknown DirectoryItemType: {directory_item_type}")
 
 
 def get_directory_item_type_style(directory_item_type: DirectoryItemType) -> str:
@@ -53,4 +57,4 @@ def get_directory_item_type_style(directory_item_type: DirectoryItemType) -> str
     elif directory_item_type == DirectoryItemType.SYMLINK:
         return Settings.SYMLINK_STYLE
     else:
-        raise ValueError(f"Unknown DirectoryItemType: {directory_item_type}")
+        raise UnknownDirectoryItemType(f"Unknown DirectoryItemType: {directory_item_type}")
