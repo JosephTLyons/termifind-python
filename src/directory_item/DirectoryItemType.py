@@ -43,23 +43,23 @@ def get_directory_item_type(path: Path) -> DirectoryItemType:
 
 DIRECTORY_ITEM_TYPE_ATTRIBUTE_DICTIONARY: dict[DirectoryItemType, dict[str, Any]] = {
     DirectoryItemType.APPLICATION: {
+        "sort_value": 1,
         "style": Settings.APPLICATION_STYLE,
         "symbol": Settings.APPLICATION_SYMBOL,
-        "sort_value": 1,
     },
     DirectoryItemType.DIRECTORY: {
+        "sort_value": 0,
         "style": Settings.DIRECTORY_STYLE,
         "symbol": Settings.DIRECTORY_SYMBOL,
-        "sort_value": 0,
     },
     DirectoryItemType.FILE: {
+        "sort_value": 2,
         "style": Settings.FILE_STYLE,
         "symbol": Settings.FILE_SYMBOL,
-        "sort_value": 2,
     },
     DirectoryItemType.SYMLINK: {
+        "sort_value": 3,
         "style": Settings.SYMLINK_STYLE,
         "symbol": Settings.SYMLINK_SYMBOL,
-        "sort_value": 3,
     },
 }
