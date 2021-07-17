@@ -91,13 +91,14 @@ class UI:
             else:
                 selection_status = " " * len(Settings.SELECTOR_SYMBOL)
 
-            item_name_text.append(f"{selection_status} ", style=Settings.SELECTOR_SYMBOL_STYLE)
-
             if should_style_text:
-                directory_item_type_color: Optional[str] = DIRECTORY_ITEM_TYPE_ATTRIBUTE_DICTIONARY[directory_item.directory_item_type]["style"]
+                select_symbol_style = Settings.SELECTOR_SYMBOL_STYLE
+                directory_item_type_style: Optional[str] = DIRECTORY_ITEM_TYPE_ATTRIBUTE_DICTIONARY[directory_item.directory_item_type]["style"]
             else:
-                directory_item_type_color = None
+                select_symbol_style = None
+                directory_item_type_style = None
 
-            item_name_text.append(f"{directory_item}\n", style=directory_item_type_color)
+            item_name_text.append(f"{selection_status} ", style=select_symbol_style)
+            item_name_text.append(f"{directory_item}\n", style=directory_item_type_style)
 
         return item_name_text
