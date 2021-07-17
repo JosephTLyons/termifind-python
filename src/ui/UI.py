@@ -69,18 +69,7 @@ class UI:
 
         item_name_texts: Text = self.__get_item_name_text(directory_container, should_style_text)
 
-        # Calling `name` on a `Path` object that is just the root directory produces an empty
-        # string, so simply call the `str()` on the path in that case
-        path_name: str = directory_container.path.name
-
-        if path_name:
-            panel_title: str = path_name
-        else:
-            panel_title = str(directory_container.path)
-
-        panel_title += f" ({len(directory_container.directory_items)})"
-
-        return Panel(item_name_texts, title=panel_title, expand=True)
+        return Panel(item_name_texts, title=str(directory_container), expand=True)
 
     def __get_item_name_text(self, directory_container: DirectoryContainer, should_style_text: bool) -> Text:
         item_name_text: Text = Text(no_wrap=True, overflow="ellipsis")
