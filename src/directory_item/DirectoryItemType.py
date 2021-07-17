@@ -12,9 +12,28 @@ class DirectoryItemType(Enum):
     FILE = auto()
     SYMLINK = auto()
 
+    def __lt__(self, other: DirectoryItemType) -> bool:
+        self_sort_value: int = directory_item_type_sort_value(self)
+        other_sort_value: int = directory_item_type_sort_value(other)
+
+        return self_sort_value < other_sort_value
+
 
 class UnknownDirectoryItemType(Exception):
     pass
+
+
+def directory_item_type_sort_value(directory_item_type: DirectoryItemType) -> int:
+    if directory_item_type == DirectoryItemType.APPLICATION:
+        return 1
+    elif directory_item_type == DirectoryItemType.DIRECTORY:
+        return 0
+    elif directory_item_type == DirectoryItemType.FILE:
+        return 2
+    elif directory_item_type == DirectoryItemType.SYMLINK:
+        return 3
+    else:
+        raise UnknownDirectoryItemType(f"Unknown DirectoryItemType: {directory_item_type}")
 
 
 def get_directory_item_type(path: Path) -> DirectoryItemType:
