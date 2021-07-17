@@ -25,14 +25,14 @@ class DirectoryItem:
         return self.name
 
     def __lt__(self, other: DirectoryItem) -> bool:
-        self_name: str = self.name
-        other_name: str = other.name
+        if Settings.SHOULD_SORT_CASE_SENSITIVE:
+            self_name: str = self.name
+            other_name: str = other.name
+        else:
+            self_name = self.name.lower()
+            other_name = other.name.lower()
 
-        if not Settings.SHOULD_SORT_CASE_SENSITIVE:
-            self_name = self_name.lower()
-            other_name = other_name.lower()
+        if Settings.SHOULD_GROUP_ITEMS_BY_TYPE:
+            return (self.directory_item_type, self_name) < (other.directory_item_type, other_name)
 
-        if not Settings.SHOULD_GROUP_ITEMS_BY_TYPE:
-            return self_name < other_name
-
-        return (self.directory_item_type, self_name) < (other.directory_item_type, other_name)
+        return self_name < other_name
