@@ -3,7 +3,7 @@ from __future__ import annotations
 from pathlib import Path
 
 from Settings import Settings
-from src.directory_item.DirectoryItemType import get_directory_item_type, get_directory_item_type_symbol
+from src.directory_item.DirectoryItemType import get_directory_item_type, DIRECTORY_ITEM_TYPE_ATTRIBUTE_DICTIONARY
 
 
 class DirectoryItem:
@@ -19,7 +19,7 @@ class DirectoryItem:
 
     def __str__(self) -> str:
         if Settings.SHOULD_SHOW_DIRECTORY_ITEM_TYPE:
-            directory_item_symbol = get_directory_item_type_symbol(self.directory_item_type)
+            directory_item_symbol = DIRECTORY_ITEM_TYPE_ATTRIBUTE_DICTIONARY[self.directory_item_type]["symbol"]
             return f"({directory_item_symbol}) {self.name}"
 
         return self.name

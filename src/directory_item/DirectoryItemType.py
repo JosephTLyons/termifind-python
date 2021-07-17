@@ -2,6 +2,7 @@ from __future__ import annotations
 
 from enum import Enum, auto
 from pathlib import Path
+from typing import Any
 
 from Settings import Settings
 
@@ -13,27 +14,14 @@ class DirectoryItemType(Enum):
     SYMLINK = auto()
 
     def __lt__(self, other: DirectoryItemType) -> bool:
-        self_sort_value: int = directory_item_type_sort_value(self)
-        other_sort_value: int = directory_item_type_sort_value(other)
+        self_sort_value: int = DIRECTORY_ITEM_TYPE_ATTRIBUTE_DICTIONARY[self]["sort_value"]
+        other_sort_value: int = DIRECTORY_ITEM_TYPE_ATTRIBUTE_DICTIONARY[other]["sort_value"]
 
         return self_sort_value < other_sort_value
 
 
 class UnknownDirectoryItemType(Exception):
     pass
-
-
-def directory_item_type_sort_value(directory_item_type: DirectoryItemType) -> int:
-    if directory_item_type == DirectoryItemType.APPLICATION:
-        return 1
-    elif directory_item_type == DirectoryItemType.DIRECTORY:
-        return 0
-    elif directory_item_type == DirectoryItemType.FILE:
-        return 2
-    elif directory_item_type == DirectoryItemType.SYMLINK:
-        return 3
-    else:
-        raise UnknownDirectoryItemType(f"Unknown DirectoryItemType: {directory_item_type}")
 
 
 def get_directory_item_type(path: Path) -> DirectoryItemType:
@@ -53,27 +41,25 @@ def get_directory_item_type(path: Path) -> DirectoryItemType:
         raise UnknownDirectoryItemType(f"{path} is not an application, directory, file, or symlink")
 
 
-def get_directory_item_type_symbol(directory_item_type: DirectoryItemType) -> str:
-    if directory_item_type == DirectoryItemType.APPLICATION:
-        return Settings.APPLICATION_SYMBOL
-    elif directory_item_type == DirectoryItemType.DIRECTORY:
-        return Settings.DIRECTORY_SYMBOL
-    elif directory_item_type == DirectoryItemType.FILE:
-        return Settings.FILE_SYMBOL
-    elif directory_item_type == DirectoryItemType.SYMLINK:
-        return Settings.SYMLINK_SYMBOL
-    else:
-        raise UnknownDirectoryItemType(f"Unknown DirectoryItemType: {directory_item_type}")
-
-
-def get_directory_item_type_style(directory_item_type: DirectoryItemType) -> str:
-    if directory_item_type == DirectoryItemType.APPLICATION:
-        return Settings.APPLICATION_STYLE
-    elif directory_item_type == DirectoryItemType.DIRECTORY:
-        return Settings.DIRECTORY_STYLE
-    elif directory_item_type == DirectoryItemType.FILE:
-        return Settings.FILE_STYLE
-    elif directory_item_type == DirectoryItemType.SYMLINK:
-        return Settings.SYMLINK_STYLE
-    else:
-        raise UnknownDirectoryItemType(f"Unknown DirectoryItemType: {directory_item_type}")
+DIRECTORY_ITEM_TYPE_ATTRIBUTE_DICTIONARY: dict[DirectoryItemType, dict[str, Any]] = {
+    DirectoryItemType.APPLICATION: {
+        "style": Settings.APPLICATION_STYLE,
+        "symbol": Settings.APPLICATION_SYMBOL,
+        "sort_value": 1,
+    },
+    DirectoryItemType.DIRECTORY: {
+        "style": Settings.DIRECTORY_STYLE,
+        "symbol": Settings.DIRECTORY_SYMBOL,
+        "sort_value": 0,
+    },
+    DirectoryItemType.FILE: {
+        "style": Settings.FILE_STYLE,
+        "symbol": Settings.FILE_SYMBOL,
+        "sort_value": 2,
+    },
+    DirectoryItemType.SYMLINK: {
+        "style": Settings.SYMLINK_STYLE,
+        "symbol": Settings.SYMLINK_SYMBOL,
+        "sort_value": 3,
+    },
+}

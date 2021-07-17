@@ -10,7 +10,7 @@ from rich.text import Text
 from Settings import Settings
 from src.DirectoryContainer import DirectoryContainer
 from src.PathContainer import PathContainer
-from src.directory_item.DirectoryItemType import get_directory_item_type_style
+from src.directory_item.DirectoryItemType import DIRECTORY_ITEM_TYPE_ATTRIBUTE_DICTIONARY
 from src.ui.LayoutRegion import LayoutRegion
 
 
@@ -94,7 +94,7 @@ class UI:
             item_name_text.append(f"{selection_status} ")
 
             if should_style_text:
-                directory_item_type_color: Optional[str] = get_directory_item_type_style(directory_item.directory_item_type)
+                directory_item_type_color: Optional[str] = DIRECTORY_ITEM_TYPE_ATTRIBUTE_DICTIONARY[directory_item.directory_item_type]["style"]
             else:
                 directory_item_type_color = None
 
