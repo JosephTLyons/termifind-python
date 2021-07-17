@@ -91,7 +91,7 @@ class UI:
             else:
                 selection_status = " " * len(Settings.SELECTOR_SYMBOL)
 
-            item_name_text.append(f"{selection_status} ")
+            item_name_text.append(f"{selection_status} ", style=Settings.SELECTOR_SYMBOL_STYLE)
 
             if should_style_text:
                 directory_item_type_color: Optional[str] = DIRECTORY_ITEM_TYPE_ATTRIBUTE_DICTIONARY[directory_item.directory_item_type]["style"]
