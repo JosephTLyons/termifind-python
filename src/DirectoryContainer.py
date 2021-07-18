@@ -27,9 +27,11 @@ class DirectoryContainer:
             name = str(self.path)
 
         if self.has_permission_error:
-            name += " (Permission Error)"
+            additional_information: str = "Permission Error"
         else:
-            name += f" ({len(self.directory_items)})"
+            additional_information = str(len(self.directory_items))
+
+        name += f" ({additional_information})"
 
         return name
 
