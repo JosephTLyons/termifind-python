@@ -10,7 +10,7 @@ from rich.text import Text
 from Settings import Settings
 from src.directory_container import DirectoryContainer
 from src.path_container import PathContainer
-from src.directory_item.directory_item_type import DIRECTORY_ITEM_TYPE_ATTRIBUTE_DICTIONARY
+from src.directory_item.directory_item_type import get_directory_item_type_attributes
 from src.ui.layout_region import LayoutRegion
 
 
@@ -82,7 +82,7 @@ class UI:
 
             if should_style_text:
                 select_symbol_style: Optional[str] = Settings.SELECTOR_SYMBOL_STYLE
-                directory_item_type_style: Optional[str] = DIRECTORY_ITEM_TYPE_ATTRIBUTE_DICTIONARY[directory_item.directory_item_type].style
+                directory_item_type_style: Optional[str] = get_directory_item_type_attributes(directory_item.directory_item_type).style
             else:
                 select_symbol_style = None
                 directory_item_type_style = None

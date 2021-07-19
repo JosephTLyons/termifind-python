@@ -14,8 +14,8 @@ class DirectoryItemType(Enum):
     SYMLINK = auto()
 
     def __lt__(self, other: DirectoryItemType) -> bool:
-        self_sort_value: int = DIRECTORY_ITEM_TYPE_ATTRIBUTE_DICTIONARY[self].sort_value
-        other_sort_value: int = DIRECTORY_ITEM_TYPE_ATTRIBUTE_DICTIONARY[other].sort_value
+        self_sort_value: int = get_directory_item_type_attributes(self).sort_value
+        other_sort_value: int = get_directory_item_type_attributes(other).sort_value
 
         return self_sort_value < other_sort_value
 
@@ -48,17 +48,15 @@ class DirectoryItemTypeAttributes:
         self.symbol: str = symbol
 
 
-DIRECTORY_ITEM_TYPE_ATTRIBUTE_DICTIONARY: dict[DirectoryItemType, DirectoryItemTypeAttributes] = {
-    DirectoryItemType.APPLICATION: DirectoryItemTypeAttributes(
-        1, Settings.APPLICATION_STYLE,  Settings.APPLICATION_SYMBOL
-    ),
-    DirectoryItemType.DIRECTORY: DirectoryItemTypeAttributes(
-        0, Settings.DIRECTORY_STYLE,  Settings.DIRECTORY_SYMBOL
-    ),
-    DirectoryItemType.FILE: DirectoryItemTypeAttributes(
-        2, Settings.FILE_STYLE,  Settings.FILE_SYMBOL
-    ),
-    DirectoryItemType.SYMLINK: DirectoryItemTypeAttributes(
-        3, Settings.SYMLINK_STYLE, Settings.SYMLINK_SYMBOL
-    ),
-}
+def get_directory_item_type_attributes(directory_item_type: DirectoryItemType) -> DirectoryItemTypeAttributes:
+    if directory_item_type == DirectoryItemType.APPLICATION:
+        return DirectoryItemTypeAttributes(1, Settings.APPLICATION_STYLE,  Settings.APPLICATION_SYMBOL)
+    elif directory_item_type == DirectoryItemType.DIRECTORY:
+        return DirectoryItemTypeAttributes(0, Settings.DIRECTORY_STYLE, Settings.DIRECTORY_SYMBOL)
+    elif directory_item_type == DirectoryItemType.FILE:
+        return DirectoryItemTypeAttributes(2, Settings.FILE_STYLE, Settings.FILE_SYMBOL)
+    elif directory_item_type == DirectoryItemType.SYMLINK:
+        return DirectoryItemTypeAttributes(3, Settings.SYMLINK_STYLE, Settings.SYMLINK_SYMBOL)
+    else:
+        # TODO: Better error
+        raise UnknownDirectoryItemType(f"Unknown {directory_item_type}")
