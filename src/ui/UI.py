@@ -82,7 +82,7 @@ class UI:
 
             if should_style_text:
                 select_symbol_style: Optional[str] = Settings.SELECTOR_SYMBOL_STYLE
-                directory_item_type_style: Optional[str] = DIRECTORY_ITEM_TYPE_ATTRIBUTE_DICTIONARY[directory_item.directory_item_type]["style"]
+                directory_item_type_style: Optional[str] = DIRECTORY_ITEM_TYPE_ATTRIBUTE_DICTIONARY[directory_item.directory_item_type].style
             else:
                 select_symbol_style = None
                 directory_item_type_style = None

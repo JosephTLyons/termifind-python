@@ -19,7 +19,7 @@ class DirectoryItem:
 
     def __str__(self) -> str:
         if Settings.SHOULD_SHOW_DIRECTORY_ITEM_TYPE:
-            directory_item_symbol = DIRECTORY_ITEM_TYPE_ATTRIBUTE_DICTIONARY[self.directory_item_type]["symbol"]
+            directory_item_symbol = DIRECTORY_ITEM_TYPE_ATTRIBUTE_DICTIONARY[self.directory_item_type].symbol
             return f"({directory_item_symbol}) {self.name}"
 
         return self.name

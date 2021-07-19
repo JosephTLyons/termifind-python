@@ -14,8 +14,8 @@ class DirectoryItemType(Enum):
     SYMLINK = auto()
 
     def __lt__(self, other: DirectoryItemType) -> bool:
-        self_sort_value: int = DIRECTORY_ITEM_TYPE_ATTRIBUTE_DICTIONARY[self]["sort_value"]
-        other_sort_value: int = DIRECTORY_ITEM_TYPE_ATTRIBUTE_DICTIONARY[other]["sort_value"]
+        self_sort_value: int = DIRECTORY_ITEM_TYPE_ATTRIBUTE_DICTIONARY[self].sort_value
+        other_sort_value: int = DIRECTORY_ITEM_TYPE_ATTRIBUTE_DICTIONARY[other].sort_value
 
         return self_sort_value < other_sort_value
 
@@ -41,25 +41,24 @@ def get_directory_item_type(path: Path) -> DirectoryItemType:
         raise UnknownDirectoryItemType(f"{path} is not an application, directory, file, or symlink")
 
 
-DIRECTORY_ITEM_TYPE_ATTRIBUTE_DICTIONARY: dict[DirectoryItemType, dict[str, Any]] = {
-    DirectoryItemType.APPLICATION: {
-        "sort_value": 1,
-        "style": Settings.APPLICATION_STYLE,
-        "symbol": Settings.APPLICATION_SYMBOL,
-    },
-    DirectoryItemType.DIRECTORY: {
-        "sort_value": 0,
-        "style": Settings.DIRECTORY_STYLE,
-        "symbol": Settings.DIRECTORY_SYMBOL,
-    },
-    DirectoryItemType.FILE: {
-        "sort_value": 2,
-        "style": Settings.FILE_STYLE,
-        "symbol": Settings.FILE_SYMBOL,
-    },
-    DirectoryItemType.SYMLINK: {
-        "sort_value": 3,
-        "style": Settings.SYMLINK_STYLE,
-        "symbol": Settings.SYMLINK_SYMBOL,
-    },
+class DirectoryItemTypeAttributes:
+    def __init__(self, sort_value: int, style: str, symbol: str) -> None:
+        self.sort_value: int = sort_value
+        self.style: str = style
+        self.symbol: str = symbol
+
+
+DIRECTORY_ITEM_TYPE_ATTRIBUTE_DICTIONARY: dict[DirectoryItemType, DirectoryItemTypeAttributes] = {
+    DirectoryItemType.APPLICATION: DirectoryItemTypeAttributes(
+        1, Settings.APPLICATION_STYLE,  Settings.APPLICATION_SYMBOL
+    ),
+    DirectoryItemType.DIRECTORY: DirectoryItemTypeAttributes(
+        0, Settings.DIRECTORY_STYLE,  Settings.DIRECTORY_SYMBOL
+    ),
+    DirectoryItemType.FILE: DirectoryItemTypeAttributes(
+        2, Settings.FILE_STYLE,  Settings.FILE_SYMBOL
+    ),
+    DirectoryItemType.SYMLINK: DirectoryItemTypeAttributes(
+        3, Settings.SYMLINK_STYLE, Settings.SYMLINK_SYMBOL
+    ),
 }
