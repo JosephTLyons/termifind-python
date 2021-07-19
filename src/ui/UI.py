@@ -8,10 +8,10 @@ from rich.panel import Panel
 from rich.text import Text
 
 from Settings import Settings
-from src.DirectoryContainer import DirectoryContainer
-from src.PathContainer import PathContainer
-from src.directory_item.DirectoryItemType import DIRECTORY_ITEM_TYPE_ATTRIBUTE_DICTIONARY
-from src.ui.LayoutRegion import LayoutRegion
+from src.directory_container import DirectoryContainer
+from src.path_container import PathContainer
+from src.directory_item.directory_item_type import DIRECTORY_ITEM_TYPE_ATTRIBUTE_DICTIONARY
+from src.ui.layout_region import LayoutRegion
 
 
 class UI:

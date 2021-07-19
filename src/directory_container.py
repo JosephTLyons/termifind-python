@@ -5,8 +5,8 @@ from pathlib import Path
 from typing import Optional
 
 from Settings import Settings
-from src.directory_item.DirectoryItem import DirectoryItem
-from src.directory_item.DirectoryItemType import DirectoryItemType
+from src.directory_item.directory_item import DirectoryItem
+from src.directory_item.directory_item_type import DirectoryItemType
 
 
 class DirectoryContainer:

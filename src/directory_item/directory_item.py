@@ -3,7 +3,7 @@ from __future__ import annotations
 from pathlib import Path
 
 from Settings import Settings
-from src.directory_item.DirectoryItemType import get_directory_item_type, DIRECTORY_ITEM_TYPE_ATTRIBUTE_DICTIONARY
+from src.directory_item.directory_item_type import get_directory_item_type, DIRECTORY_ITEM_TYPE_ATTRIBUTE_DICTIONARY
 
 
 class DirectoryItem:

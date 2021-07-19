@@ -1,7 +1,7 @@
 from pathlib import Path
 from typing import Optional
 
-from src.DirectoryContainer import DirectoryContainer
+from src.directory_container import DirectoryContainer
 from src.file_utility_functions import get_list_of_directories_from_path
 
 
