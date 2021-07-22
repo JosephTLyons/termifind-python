@@ -54,6 +54,9 @@ class DirectoryContainer:
             for item in self.path.iterdir():
                 directory_item: DirectoryItem = DirectoryItem(item)
 
+                if directory_item.name in Settings.FILE_ITEM_EXCLUSION_LIST:
+                    continue
+
                 if directory_item.is_hidden_file and not Settings.SHOULD_SHOW_HIDDEN_FILES:
                     continue
 
