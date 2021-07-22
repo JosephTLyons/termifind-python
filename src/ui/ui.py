@@ -1,3 +1,4 @@
+from src.directory_item.directory_item import DirectoryItemMetaData
 from typing import Optional
 
 from rich import print
@@ -31,14 +32,14 @@ class UI:
 
         should_style_text: bool = not Settings.IS_IN_FOCUS_MODE
 
-        previous_directory_container_panel: Panel = self.get_directory_container_panel(
+        previous_directory_container_panel: Panel = self.get_main_panel(
             self.path_container.previous_directory_container, should_style_text
         )
-        current_directory_container_panel: Panel = self.get_directory_container_panel(
+        current_directory_container_panel: Panel = self.get_main_panel(
             self.path_container.current_directory_container
         )
-        next_directory_container_panel: Panel = self.get_directory_container_panel(
-            self.path_container.next_directory_container, should_style_text
+        next_directory_container_panel: Panel = self.get_main_panel(
+            self.path_container.selected_item_contents_preview, should_style_text
         )
 
         if Settings.IS_IN_FOCUS_MODE:
@@ -63,15 +64,19 @@ class UI:
                 print(self.layout)
                 user_input = input("")
 
-    def get_directory_container_panel(self, directory_container: Optional[DirectoryContainer], should_style_text: bool = True) -> Panel:
+    def get_main_panel(self, directory_container: Optional[DirectoryContainer | DirectoryItemMetaData], should_style_text: bool = True) -> Panel:
         if not directory_container:
             return Panel(Text(""))
 
-        item_name_texts: Text = self.__get_item_name_text(directory_container, should_style_text)
+        # TODO: Use a better system to replace using isinstance, which is gross
+        if isinstance(directory_container, DirectoryContainer):
+            item_name_text: Text = self.__get_directory_container_item_name_text(directory_container, should_style_text)
+        else:
+            item_name_text = self.__get_metadata_item_name_text(directory_container, should_style_text)
 
-        return Panel(item_name_texts, title=str(directory_container), expand=True)
+        return Panel(item_name_text, title=str(directory_container), expand=True)
 
-    def __get_item_name_text(self, directory_container: DirectoryContainer, should_style_text: bool) -> Text:
+    def __get_directory_container_item_name_text(self, directory_container: DirectoryContainer, should_style_text: bool) -> Text:
         item_name_text: Text = Text(no_wrap=True, overflow="ellipsis")
 
         for index, directory_item in enumerate(directory_container.directory_items):
@@ -89,5 +94,17 @@ class UI:
 
             item_name_text.append(f"{selection_status} ", style=select_symbol_style)
             item_name_text.append(f"{directory_item}\n", style=directory_item_type_style)
+
+        return item_name_text
+
+    def __get_metadata_item_name_text(self, directory_item_metadata: DirectoryItemMetaData, should_style_text: bool) -> Text:
+        item_name_text: Text = Text(no_wrap=True, overflow="ellipsis")
+
+        file_metadata_dictionary = directory_item_metadata.get_file_metadata_dictionary()
+        length_of_longest_metadata_name = len(max(file_metadata_dictionary.keys(), key=len))
+
+        for metadata_name, metadata_value in file_metadata_dictionary.items():
+            padded_metadata_name = (metadata_name).ljust(length_of_longest_metadata_name)
+            item_name_text.append(f"* {padded_metadata_name} | {metadata_value}\n")
 
         return item_name_text

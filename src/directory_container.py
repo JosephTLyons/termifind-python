@@ -2,10 +2,9 @@ from __future__ import annotations
 
 import bisect
 from pathlib import Path
-from typing import Optional
 
 from Settings import Settings
-from src.directory_item.directory_item import DirectoryItem
+from src.directory_item.directory_item import DirectoryItem, DirectoryItemMetaData
 from src.directory_item.directory_item_type import DirectoryItemType
 
 
@@ -63,10 +62,13 @@ class DirectoryContainer:
 
         return directory_items
 
-    def get_next_directory_container(self) -> Optional[DirectoryContainer]:
-        directory_item = self.directory_items[self.selected_item_index]
+    def get_selected_directory_item(self) -> DirectoryItem:
+        return self.directory_items[self.selected_item_index]
+
+    def get_item_related_to_selected_item(self) -> DirectoryContainer | DirectoryItemMetaData:
+        directory_item: DirectoryItem = self.get_selected_directory_item()
 
         if directory_item.directory_item_type == DirectoryItemType.DIRECTORY:
             return DirectoryContainer(directory_item.path)
 
-        return None
+        return directory_item.metadata
