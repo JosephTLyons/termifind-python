@@ -9,7 +9,7 @@
 
 
 
-Must happen before committing and mering
+Must happen before committing and merging
 - Clean up the way the switch happens for displaying metadata vs directory container
 - Style Metadata with Rich
 - Put file order number back to its original value
