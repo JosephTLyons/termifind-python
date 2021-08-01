@@ -1,9 +1,10 @@
 from __future__ import annotations
 import datetime
 import os
-
 from pathlib import Path
 from typing import Any, Callable
+
+import humanize  # type: ignore
 
 from Settings import Settings
 from src.directory_item.directory_item_type import get_directory_item_type, get_directory_item_type_attributes
@@ -47,12 +48,13 @@ class DirectoryItem:
 # This class was it its own module, but was moved into this class to resolve a circular import
 # TODO: Figure out to solve the circular import issue later
 class DirectoryItemMetaData:
-    def __init__(self, directory_item: DirectoryItem):
+    def __init__(self, directory_item: DirectoryItem) -> None:
         self.directory_item: DirectoryItem = directory_item
-        self.size = self.__get_file_metadata(directory_item.path, os.path.getsize)
-        self.created_time = self.__get_file_metadata(directory_item.path, os.path.getctime)
-        self.modified_time = self.__get_file_metadata(directory_item.path, os.path.getmtime)
-        self.accessed_time = self.__get_file_metadata(directory_item.path, os.path.getatime)
+        file_size_in_bytes = self.__get_file_metadata(directory_item.path, os.path.getsize)
+        self.size: str = humanize.naturalsize(file_size_in_bytes) if file_size_in_bytes else "0 Bytes"
+        self.created_time: float = self.__get_file_metadata(directory_item.path, os.path.getctime)
+        self.modified_time: float = self.__get_file_metadata(directory_item.path, os.path.getmtime)
+        self.accessed_time: float = self.__get_file_metadata(directory_item.path, os.path.getatime)
 
 
     def __str__(self) -> str:
@@ -70,7 +72,7 @@ class DirectoryItemMetaData:
 
     def get_file_metadata_dictionary(self) -> dict[str, Any]:
         metadata_dictionary: dict[str, Any] = {
-            "Size": f"{self.size} Bytes",
+            "Size": self.size,
             "Created": self.__get_formatted_datetime_string_from_timestamp(self.created_time),
             "Modified": self.__get_formatted_datetime_string_from_timestamp(self.modified_time),
             "Accessed": self.__get_formatted_datetime_string_from_timestamp(self.accessed_time),
@@ -78,7 +80,7 @@ class DirectoryItemMetaData:
 
         return metadata_dictionary
 
-    def __get_formatted_datetime_string_from_timestamp(self, timestamp: int) -> str:
+    def __get_formatted_datetime_string_from_timestamp(self, timestamp: float) -> str:
         datetime_object = datetime.datetime.fromtimestamp(timestamp)
         datetime_format_string = "%b %d, %Y %I:%M %p"
 
