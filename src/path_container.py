@@ -1,4 +1,3 @@
-from itertools import zip_longest
 from pathlib import Path
 from typing import Optional
 
@@ -10,10 +9,8 @@ from src.file_utility_functions import get_list_of_directories_from_path
 class PathContainer:
     def __init__(self, path: Path) -> None:
         self.path = path
-        directories_list: list[Path] = get_list_of_directories_from_path(path)
-        path_and_selected_item_zip: zip_longest = zip_longest(directories_list, directories_list[1:])
         self.directory_containers: list[DirectoryContainer] = [
-            DirectoryContainer(path, selected_item=selected_item) for path, selected_item in path_and_selected_item_zip
+            DirectoryContainer(path.parent, selected_item=path) for path in get_list_of_directories_from_path(path)
 
         ]
 
