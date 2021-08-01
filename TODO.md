@@ -7,5 +7,4 @@
 - Can the current method of coloring text for focus mode be moved to where the panels are colored for focus mode?
 - Clean up the way the switch happens for displaying metadata vs directory container
 - Style Metadata with Rich
-- Put file order number back to its original value
-- Commit and Merge
+- Change directory containers way of holding items.  Instead of holding a list, it should hold a dict of items thas maps the path of the the item to the directory container.
