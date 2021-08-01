@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import bisect
 from pathlib import Path
+from typing import Optional
 
 from Settings import Settings
 from src.directory_item.directory_item import DirectoryItem, DirectoryItemMetaData
@@ -9,11 +10,15 @@ from src.directory_item.directory_item_type import DirectoryItemType
 
 
 class DirectoryContainer:
-    def __init__(self, path: Path) -> None:
+    def __init__(self, path: Path, selected_item: Optional[Path]=None) -> None:
         self.path: Path = path
         self.has_permission_error: bool = False
-        self.directory_items: list[DirectoryItem] = self.get_directory_items()
-        self.selected_item_index: int = 0
+        self.directory_items: list[DirectoryItem] = self.__get_directory_items()
+
+        if selected_item:
+            self.selected_item_index: int = self.__get_index_of_selected_directory_item(selected_item)
+        else:
+            self.selected_item_index = 0
 
     def __str__(self) -> str:
         path_name: str = self.path.name
@@ -46,7 +51,18 @@ class DirectoryContainer:
         else:
             self.selected_item_index -= 1
 
-    def get_directory_items(self) -> list[DirectoryItem]:
+    def get_selected_directory_item(self) -> DirectoryItem:
+        return self.directory_items[self.selected_item_index]
+
+    def get_item_related_to_selected_item(self) -> DirectoryContainer | DirectoryItemMetaData:
+        directory_item: DirectoryItem = self.get_selected_directory_item()
+
+        if directory_item.directory_item_type == DirectoryItemType.DIRECTORY:
+            return DirectoryContainer(directory_item.path)
+
+        return directory_item.metadata
+
+    def __get_directory_items(self) -> list[DirectoryItem]:
         directory_items: list[DirectoryItem] = []
 
         try:
@@ -65,13 +81,9 @@ class DirectoryContainer:
 
         return directory_items
 
-    def get_selected_directory_item(self) -> DirectoryItem:
-        return self.directory_items[self.selected_item_index]
+    def __get_index_of_selected_directory_item(self, selected_item: Path) -> int:
+        for index, directory_item in enumerate(self.directory_items):
+            if directory_item.path == selected_item:
+                return index
 
-    def get_item_related_to_selected_item(self) -> DirectoryContainer | DirectoryItemMetaData:
-        directory_item: DirectoryItem = self.get_selected_directory_item()
-
-        if directory_item.directory_item_type == DirectoryItemType.DIRECTORY:
-            return DirectoryContainer(directory_item.path)
-
-        return directory_item.metadata
+        return 0
