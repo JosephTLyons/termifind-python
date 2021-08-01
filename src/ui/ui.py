@@ -80,7 +80,7 @@ class UI:
         item_name_text: Text = Text(no_wrap=True, overflow="ellipsis")
 
         for index, directory_item in enumerate(directory_container.directory_items):
-            if index == directory_container.selected_item_index:
+            if index == directory_container.selected_item_index and directory_container.selected_item:
                 selection_status: str = Settings.SELECTOR_SYMBOL
             else:
                 selection_status = " " * len(Settings.SELECTOR_SYMBOL)

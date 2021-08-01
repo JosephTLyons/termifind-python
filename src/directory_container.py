@@ -14,9 +14,10 @@ class DirectoryContainer:
         self.path: Path = path
         self.has_permission_error: bool = False
         self.directory_items: list[DirectoryItem] = self.__get_directory_items()
+        self.selected_item = selected_item
 
-        if selected_item:
-            self.selected_item_index: int = self.__get_index_of_selected_directory_item(selected_item)
+        if self.selected_item:
+            self.selected_item_index: int = self.__get_index_of_selected_directory_item()
         else:
             self.selected_item_index = 0
 
@@ -81,9 +82,9 @@ class DirectoryContainer:
 
         return directory_items
 
-    def __get_index_of_selected_directory_item(self, selected_item: Path) -> int:
+    def __get_index_of_selected_directory_item(self) -> int:
         for index, directory_item in enumerate(self.directory_items):
-            if directory_item.path == selected_item:
+            if directory_item.path == self.selected_item:
                 return index
 
         return 0
