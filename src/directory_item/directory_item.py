@@ -50,7 +50,7 @@ class DirectoryItem:
 class DirectoryItemMetaData:
     def __init__(self, directory_item: DirectoryItem) -> None:
         self.directory_item: DirectoryItem = directory_item
-        file_size_in_bytes = self.__get_file_metadata(directory_item.path, os.path.getsize)
+        file_size_in_bytes: int = self.__get_file_metadata(directory_item.path, os.path.getsize)
         self.size: str = humanize.naturalsize(file_size_in_bytes) if file_size_in_bytes else "0 Bytes"
         self.created_time: float = self.__get_file_metadata(directory_item.path, os.path.getctime)
         self.modified_time: float = self.__get_file_metadata(directory_item.path, os.path.getmtime)
