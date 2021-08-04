@@ -8,7 +8,7 @@ from rich.live import Live
 from rich.panel import Panel
 from rich.text import Text
 
-from Settings import Settings
+from settings import Settings
 from src.directory_container import DirectoryContainer
 from src.path_container import PathContainer
 from src.directory_item.directory_item_type import get_directory_item_type_attributes

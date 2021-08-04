@@ -4,7 +4,7 @@ import bisect
 from pathlib import Path
 from typing import Optional
 
-from Settings import Settings
+from settings import Settings
 from src.directory_item.directory_item import DirectoryItem, DirectoryItemMetaData
 from src.directory_item.directory_item_type import DirectoryItemType
 
