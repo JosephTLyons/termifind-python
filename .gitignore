@@ -1,6 +1,7 @@
+__pycache__
 .DS_STORE
 .idea
 .mypy_cache
-__pycache__
+termifind.log
 user_settings.json
 virtual_environment
