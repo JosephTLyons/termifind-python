@@ -22,7 +22,7 @@ class TermiFindApplication(App):  # type: ignore
 
 
 def main() -> None:
-    TermiFindApplication.run()
+    TermiFindApplication.run(log="termifind.log")
 
 
 if __name__ == "__main__":
