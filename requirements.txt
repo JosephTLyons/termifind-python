@@ -1,4 +1,4 @@
 humanize==3.11.0
 mypy==0.910
-rich==10.8.0
+rich==10.9.0
 textual==0.1.10
