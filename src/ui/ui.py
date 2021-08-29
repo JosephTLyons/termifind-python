@@ -1,70 +1,62 @@
 from src.directory_item.directory_item import DirectoryItemMetaData
 from typing import Optional
 
-from rich import print
-from rich.console import Console
-from rich.layout import Layout
-from rich.live import Live
 from rich.panel import Panel
 from rich.text import Text
+from textual.reactive import Reactive  # type: ignore
+from textual.widget import Widget  # type: ignore
+
 
 from settings import Settings
 from src.directory_container import DirectoryContainer
 from src.path_container import PathContainer
 from src.directory_item.directory_item_type import get_directory_item_type_attributes
-from src.ui.layout_region import LayoutRegion
+
+class TermiFindPanelWidget(Widget):  # type: ignore
+    mouse_over = Reactive(False)
+
+    def __init__(self, panel: Panel) -> None:
+        super().__init__()
+        self.panel: Panel = panel
+
+    def render(self) -> Panel:
+        return self.panel
 
 
 class UI:
     def __init__(self) -> None:
-        self.path_container: PathContainer = PathContainer(Settings.LAUNCH_PATH)
-        # self.console: Console = Console()
-        self.layout: Layout = Layout()
-
         path_panel: Panel = Panel(f"Current Path: {Settings.LAUNCH_PATH}", title="TermiFind", expand=True)
+        self.termifind_panel_widget: TermiFindPanelWidget = TermiFindPanelWidget(path_panel)
 
-        layouts: list[Layout] = [
-            Layout(path_panel, name=LayoutRegion.UPPER.name, size=3),
-            Layout(name=LayoutRegion.LOWER.name),
-        ]
-
-        self.layout.split_column(*layouts)
+        path_container: PathContainer = PathContainer(Settings.LAUNCH_PATH)
 
         should_style_text: bool = not Settings.IS_IN_FOCUS_MODE
 
-        previous_directory_container_panel: Panel = self.get_main_panel(
-            self.path_container.previous_directory_container, should_style_text
+        previous_directory_container_panel: Panel = self.__get_main_panel(
+            path_container.previous_directory_container, should_style_text
         )
-        current_directory_container_panel: Panel = self.get_main_panel(
-            self.path_container.current_directory_container
+        current_directory_container_panel: Panel = self.__get_main_panel(
+            path_container.current_directory_container
         )
-        next_directory_container_panel: Panel = self.get_main_panel(
-            self.path_container.selected_item_contents_preview, should_style_text
+        next_directory_container_panel: Panel = self.__get_main_panel(
+            path_container.selected_item_contents_preview, should_style_text
         )
 
         if Settings.IS_IN_FOCUS_MODE:
             previous_directory_container_panel.style = Settings.FOCUS_MODE_DIMMED_STYLE
             next_directory_container_panel.style = Settings.FOCUS_MODE_DIMMED_STYLE
 
-        layouts = [
-            Layout(previous_directory_container_panel, name=LayoutRegion.LEFT.name),
-            Layout(current_directory_container_panel, name=LayoutRegion.MIDDLE.name),
-            Layout(next_directory_container_panel, name=LayoutRegion.RIGHT.name)
-        ]
+        self.previous_directory_container_panel_widget: TermiFindPanelWidget = TermiFindPanelWidget(
+            previous_directory_container_panel
+        )
+        self.current_directory_container_panel_widget: TermiFindPanelWidget = TermiFindPanelWidget(
+            current_directory_container_panel
+        )
+        self.next_directory_container_panel_widget: TermiFindPanelWidget = TermiFindPanelWidget(
+            next_directory_container_panel
+        )
 
-        self.layout[LayoutRegion.LOWER.name].split_row(*layouts)
-
-    # Maybe move this out of the UI class an into main() or some Console class?
-    def start(self) -> None:
-        with Live(self.layout, refresh_per_second=4, screen=True):
-            Console().clear_live()
-            user_input = ""
-
-            while user_input.lower() != "q":
-                print(self.layout)
-                user_input = input("")
-
-    def get_main_panel(self, directory_container: Optional[DirectoryContainer | DirectoryItemMetaData], should_style_text: bool = True) -> Panel:
+    def __get_main_panel(self, directory_container: Optional[DirectoryContainer | DirectoryItemMetaData], should_style_text: bool = True) -> Panel:
         if not directory_container:
             return Panel(Text(""))
 
