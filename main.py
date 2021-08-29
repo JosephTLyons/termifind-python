@@ -9,7 +9,7 @@ class TermiFindApplication(App):  # type: ignore
         self.ui: UI = UI()
 
     async def on_load(self) -> None:
-            await self.bind("q", "quit")
+        await self.bind("q", "quit")
 
     async def on_mount(self) -> None:
         await self.view.dock(self.ui.termifind_panel_widget, edge="top", size=3)
