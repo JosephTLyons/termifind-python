@@ -17,7 +17,7 @@ class TermiFindApplication(App):  # type: ignore
         await self.bind("q", "quit")
 
     async def on_mount(self) -> None:
-        await self.view.dock(self.ui.termifind_panel_widget, edge="top", size=3)
+        await self.view.dock(self.ui.termifind_path_panel_widget, edge="top", size=3)
         await self.view.dock(
             self.ui.previous_directory_container_scroll_view,
             self.ui.current_directory_container_scroll_view,

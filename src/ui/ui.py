@@ -15,7 +15,7 @@ from src.path_container import PathContainer
 class UI:
     def __init__(self, path_container: PathContainer) -> None:
         path_panel: Panel = Panel(f"Current Path: {Settings.LAUNCH_PATH}", title="TermiFind", expand=True)
-        self.termifind_panel_widget: TermiFindPanelWidget = TermiFindPanelWidget(path_panel)
+        self.termifind_path_panel_widget: TermiFindPanelWidget = TermiFindPanelWidget(path_panel)
 
         should_style_text: bool = not Settings.IS_IN_FOCUS_MODE
 
