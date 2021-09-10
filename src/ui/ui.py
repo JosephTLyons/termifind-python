@@ -43,7 +43,7 @@ class UI:
             scroll_view = TermiFindScrollView(item_buttons_view)
         else:
             meta_data_text: Text = self.__get_item_metadata_text(directory_container)
-            scroll_view: TermiFindScrollView = TermiFindScrollView(meta_data_text)
+            scroll_view = TermiFindScrollView(meta_data_text)
 
         return scroll_view
 

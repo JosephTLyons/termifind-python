@@ -6,7 +6,7 @@ from src.ui.custom_widgets import TermiFindButton
 
 
 class TermiFindButtonsView(View, layout=VerticalLayout):  # type: ignore
-    def add(self, button: TermiFindButton):
+    def add(self, button: TermiFindButton) -> None:
         self.layout.add(button)
 
 class TermiFindScrollView(ScrollView):  # type: ignore
