@@ -9,3 +9,4 @@
 - Style Metadata with Rich
 - Change directory containers way of holding items.  Instead of holding a list, it should hold a dict of items thas maps the path of the the item to the directory container.
 - Show file contents in preview (either in a new window or in same window)
+- Reduce the number of `# type: ignore`s
