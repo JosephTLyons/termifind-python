@@ -1,7 +1,7 @@
 from rich.panel import Panel
-from textual.reactive import Reactive  # type: ignore
-from textual.widget import Widget  # type: ignore
-from textual.widgets import Button  # type: ignore
+from textual.reactive import Reactive
+from textual.widget import Widget
+from textual.widgets import Button
 
 
 class TermiFindButton(Button):  # type: ignore

@@ -1,4 +1,4 @@
-from textual.app import App  # type: ignore
+from textual.app import App
 
 from settings import Settings
 from src.path_container import PathContainer

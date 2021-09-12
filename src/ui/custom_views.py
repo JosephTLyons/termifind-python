@@ -1,6 +1,6 @@
-from textual.layouts.vertical import VerticalLayout  # type: ignore
-from textual.view import View  # type: ignore
-from textual.widgets import ScrollView  # type: ignore
+from textual.layouts.vertical import VerticalLayout
+from textual.view import View
+from textual.widgets import ScrollView
 
 from src.ui.custom_widgets import TermiFindButton
 

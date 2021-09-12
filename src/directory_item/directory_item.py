@@ -4,7 +4,7 @@ import os
 from pathlib import Path
 from typing import Any, Callable
 
-import humanize  # type: ignore
+import humanize
 
 from settings import Settings
 from src.directory_item.directory_item_type import get_directory_item_type, get_directory_item_type_attributes
