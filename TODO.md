@@ -15,5 +15,4 @@
 
 - Get 3 columns to work
 - Get outline and title added
-- Get focus mode to work with metadata window
 - Get all of UI file variable names, function names, and types fixes

@@ -29,10 +29,6 @@ class UI:
             path_container.selected_item_contents_preview, should_style_text
         )
 
-        if Settings.IS_IN_FOCUS_MODE:
-            self.previous_directory_container_scroll_view.style = Settings.FOCUS_MODE_DIMMED_STYLE
-            self.next_directory_container_scroll_view.style = Settings.FOCUS_MODE_DIMMED_STYLE
-
     def __get_scroll_view(self, directory_container: Optional[DirectoryContainer | DirectoryItemMetaData], should_style_text: bool = True) -> TermiFindScrollView:
         if not directory_container:
             return TermiFindScrollView(Text(""))
