@@ -7,6 +7,13 @@
 - Can the current method of coloring text for focus mode be moved to where the panels are colored for focus mode?
 - Clean up the way the switch happens for displaying metadata vs directory container
 - Style Metadata with Rich
-- Change directory containers way of holding items.  Instead of holding a list, it should hold a dict of items thas maps the path of the the item to the directory container.
+- Change directory containers way of holding items.  Instead of holding a list, it should hold a dict of items that maps the path of the the item to the directory container.
 - Show file contents in preview (either in a new window or in same window)
 - Reduce the number of `# type: ignore`s
+
+## Textual-Transition Changes
+
+- Get 3 columns to work
+- Get outline and title added
+- Get focus mode to work with metadata window
+- Get all of UI file variable names, function names, and types fixes
