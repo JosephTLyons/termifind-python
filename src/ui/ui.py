@@ -31,7 +31,7 @@ class UI:
 
     def __get_scroll_view(self, directory_container: Optional[DirectoryContainer | DirectoryItemMetaData], should_style_text: bool = True) -> TermiFindScrollView:
         if not directory_container:
-            return TermiFindScrollView(Text(""))
+            return TermiFindScrollView()
 
         # TODO: Use a better system to replace using `isinstance`, which is gross
         if isinstance(directory_container, DirectoryContainer):
