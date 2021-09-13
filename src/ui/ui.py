@@ -65,12 +65,6 @@ class UI:
 
             termifind_buttons_view.add(TermiFindButton(item_name_text))
 
-        # TODO: Delete
-        for widget in termifind_buttons_view.layout.get_widgets():
-            print(widget)
-
-        print()
-
         return termifind_buttons_view
 
     def __get_item_metadata_text(self, directory_item_metadata: DirectoryItemMetaData) -> Text:
